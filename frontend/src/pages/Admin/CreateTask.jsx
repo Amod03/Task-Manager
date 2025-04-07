@@ -2,6 +2,9 @@ import React, { useState } from 'react'
 import { LuTrash2 } from 'react-icons/lu';
 import { useLocation, useNavigate } from 'react-router-dom'
 import DashboardLayout from '../../components/layouts/DashboardLayout';
+import { PRIORITY_DATA } from '../../utils/data';
+import SelectDropdown from '../../components/Inputs/SelectDropdown';
+import SelectUsers from '../../components/Inputs/SelectUsers';
 
 const CreateTask = () => {
   const location=useLocation();
@@ -31,7 +34,7 @@ const CreateTask = () => {
       title:"",
       description:"",
       priority:"Low",
-      dueData:null,
+      dueData:"",
       assignedTo:[],
       todoChecklist:[],
       attachments:[],
@@ -97,6 +100,40 @@ const CreateTask = () => {
               value={taskData.description}
               onChange={({target})=>handleValueChange("description",target.value)}
              />
+            </div>
+            <div className='grid grid-cols-12 gap-4 mt-2'>
+              <div className='col-span-6 md:col-span-4'>
+                <label className='text-xs font-medium text-slate-600'>
+                  Priority
+                </label>
+                <SelectDropdown 
+                  options={PRIORITY_DATA}
+                  value={taskData.priority}
+                  onChange={(value)=>handleValueChange("priority",value)}
+                  placeholder="Select Priority"
+                  />
+              </div>
+              <div className='col-span-6 md:col-span-4'>
+                <label className='text-xs font-medium text-slate-600'>
+                  Due Date
+                </label>
+                <input 
+                  placeholder='Create App UI'
+                  className='form-input'
+                  value={taskData.dueData}
+                  onChange={({target})=>handleValueChange("dueDate",target.value)}
+                  type="date"
+                  />
+              </div>
+              <div className='col-span-12 md:col-span-3'>
+              <label className='text-xs font-medium text-slate-600'>
+                Assign To
+              </label>
+              <SelectUsers
+                seelctedUsers={taskData.assignedTo}
+                setSelectedUsers={(value)=>handleValueChange("assignedTo",value)}
+                />
+              </div>
             </div>
           </div>
         </div>
