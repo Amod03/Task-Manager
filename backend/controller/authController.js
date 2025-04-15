@@ -46,7 +46,7 @@ const registerUser=async(req,res)=>{
         token:generateToken(user._id)
     });
  }catch(error){
-    res.status(500),json({message:"Server Error",error:error.message});
+    res.status(500).json({message:"Server Error",error:error.message});
  }
 }
 
@@ -74,7 +74,7 @@ const loginUser=async(req,res)=>{
         token:generateToken(user._id)
     });
   }catch(error){
-    res.status(500),json({message:"Server Error",error:error.message});
+    res.status(500).json({message:"Server Error",error:error.message});
  }
 }
 
